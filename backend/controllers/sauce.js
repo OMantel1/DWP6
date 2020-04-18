@@ -25,7 +25,7 @@ exports.createSauce = (req, res, next) =>{
     .catch(error => res.status(400).json({ error }));
 };
 
-exports.getAllSauces = (req, res, next) =>{
+exports.modifySauce = (req, res, next) =>{
     Sauce.updateOne({
         _id = req.params.id
     }), {
@@ -36,7 +36,7 @@ exports.getAllSauces = (req, res, next) =>{
     .catch(error => res.status(400).json({ error }));
 };
 
-exports.getAllSauces = (req, res, next) =>{
+exports.deleteSauce = (req, res, next) =>{
     Sauce.deleteOne({
         _id = req.params.id
     })
