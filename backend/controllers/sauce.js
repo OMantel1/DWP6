@@ -8,7 +8,7 @@ exports.getAllSauces = (req, res, next) =>{
 
 exports.getOneSauce = (req, res, next) =>{
     Sauce.findOne({
-        _id = req.params.id
+        _id : req.params.id
     })
     .then(sauces => res.status(200).json(sauces))
     .catch(error => res.status(400).json({ error }));
@@ -27,18 +27,18 @@ exports.createSauce = (req, res, next) =>{
 
 exports.modifySauce = (req, res, next) =>{
     Sauce.updateOne({
-        _id = req.params.id
-    }), {
+        _id : req.params.id
+    }, {
         ...req.body,
         _id: req.params.id
-    }
+    })
     .then(sauces => res.status(200).json({ message: 'sauce modifiée !'}))
     .catch(error => res.status(400).json({ error }));
 };
 
 exports.deleteSauce = (req, res, next) =>{
     Sauce.deleteOne({
-        _id = req.params.id
+        _id : req.params.id
     })
     .then(sauces => res.status(200).json({ message: 'sauce supprimée !'}))
     .catch(error => res.status(400).json({ error }));
