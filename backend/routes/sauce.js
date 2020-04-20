@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const sauceCtrl = require('../controllers/sauce');
 
-router.get('/sauces', sauceCtrl.getAllSauces);
-router.get('/sauces/:id', sauceCtrl.getOneSauce);
-router.post('/sauces', sauceCtrl.createSauce);
-router.put('/sauces/:id', sauceCtrl.modifySauce);
-router.delete('/sauces/:id', sauceCtrl.deleteSauce);
+const auth = require('../middleware/auth');
+
+router.get('/', sauceCtrl.getAllSauces);
+router.get('/:id', auth, sauceCtrl.getOneSauce);
+router.post('/', auth, sauceCtrl.createSauce);
+router.put('/:id', auth, sauceCtrl.modifySauce);
+router.delete('/:id', auth, sauceCtrl.deleteSauce);
 
 module.exports = router;
