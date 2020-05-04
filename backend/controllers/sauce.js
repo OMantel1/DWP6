@@ -1,6 +1,7 @@
-const Sauce = require('../models/Sauce');
+const Sauce = require('../models/Sauce'); //importe model sauce
 const fs = require('fs');
 
+//fonctions
 exports.getAllSauces = (req, res, next) =>{
     Sauce.find()
     .then(sauces => res.status(200).json(sauces))
@@ -27,7 +28,7 @@ exports.createSauce = (req, res, next) =>{
         usersDisliked: []
 
     });
-    // const image = req.body.image;
+
     sauce.save()
     .then(() => res.status(201).json({ message: 'sauce bien enregistrée !'}))
     .catch(error => res.status(400).json({ error }));
@@ -73,7 +74,7 @@ exports.updateLikes = (req, res, next) => {
 
     Sauce.find({_id: req.params.id})
         .then(data => {
-            console.log(data[0].usersDisliked);
+            // console.log(data[0].usersDisliked);
             const userHasDisliked = data[0].usersDisliked.includes(req.body.userId);
             const userHasLiked = data[0].usersLiked.includes(req.body.userId);
 
@@ -81,13 +82,11 @@ exports.updateLikes = (req, res, next) => {
                 if (!userHasLiked){
                     likeSauce(req, res);
                 }
-                console.log('+1');
         
             } else if (req.body.like === -1){
                 if(!userHasDisliked){
                     dislikeSauce(req, res);
                 }
-                console.log('-1');
 
         
             } else if(req.body.like === 0) {
@@ -97,7 +96,6 @@ exports.updateLikes = (req, res, next) => {
                 if (userHasDisliked){
                     undislikeSauce(req, res);
                 }
-                console.log("0");
             }    
         })
         .catch(error => res.status(400).json({ error }));

@@ -3,11 +3,12 @@ const bodyParser = require('body-parser');
 const mongoose= require('mongoose');
 const path = require('path');
 
+//importe routers
 const saucesRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 
-mongoose.connect('mongodb+srv://OMuser1:pwdatabgk8@cluster0-9uleb.mongodb.net/Spbd1?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://<user>:<password>@cluster0-9uleb.mongodb.net/<database>?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
+//enregistre routers
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
